@@ -14,7 +14,13 @@ abstract class List<E> {
 
 abstract class EmptyL<E> extends List<E> {
 
+    public boolean isEmpty(){
+        return true;
+    }
 
+    public boolean isSingleton(){
+        return false;
+    }
 
 }
 
@@ -27,6 +33,18 @@ abstract class NodeL<E> extends List<E> {
     NodeL (E f, List<E> r) {
         this.first = f;
         this.rest = r;
+    }
+
+    public boolean isEmpty(){
+        return false;
+    }
+
+    public boolean isSingleton(){
+        if(...){ //if getRest throws excepetion
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
