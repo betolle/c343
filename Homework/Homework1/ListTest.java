@@ -1,11 +1,12 @@
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ListTest {
-public List<E> A = new EmptyL<E>;
-public List<int> B = new NodeL<int>(4.  A);
-public List<int> C = new NodeL<int>(0.  B);
+    public List<Integer> A = new EmptyL<Integer>();
+public List<Integer> B = new NodeL<Integer>(4, A);
+public List<Integer> C = new NodeL<Integer>(0, B);
 
     @Test
     public void isEmpty() {
@@ -64,5 +65,7 @@ public List<int> C = new NodeL<int>(0.  B);
         assertEquals(true ,B.contains(4));
         assertEquals(false, C.contains(2));
         assertEquals(true, C.contains(4));
+}
+
 }
 
