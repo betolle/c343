@@ -1,139 +1,137 @@
 
-class EmptyListE extends Exception {}
+    class EmptyListE extends Exception {}
 
-    abstract class List<E> {
-        abstract boolean isEmpty();
+        abstract class List<E> {
+            abstract boolean isEmpty();
 
-        abstract boolean isSingleton();
+            abstract boolean isSingleton();
 
-        abstract E getFirst() throws EmptyListE;
+            abstract E getFirst() throws EmptyListE;
 
-        abstract List<E> getRest() throws EmptyListE;
+            abstract List<E> getRest() throws EmptyListE;
 
-        abstract E get(int index) throws EmptyListE;
+            abstract E get(int index) throws EmptyListE;
 
-        abstract int length();
+            abstract int length();
 
-        abstract List<E> append(List<E> other);
+            abstract List<E> append(List<E> other);
 
-        abstract boolean contains(E elem);
-    }
-
-    class EmptyL<E> extends List<E> {
-
-        public boolean isEmpty() {
-            return true;
+            abstract boolean contains(E elem);
         }
 
-        public boolean isSingleton() {
-            return false;
-        }
+        class EmptyL<E> extends List<E> {
 
-        public E getFirst() {
-
-            throw new IllegalArgumentException("EmptyListE");
-        }
-
-        public List<E> getRest() {
-
-            throw new IllegalArgumentException("EmptyListE");
-        }
-
-        public E get(int index) {
-
-            throw new IllegalArgumentException("EmptyListE");
-        }
-
-        public int length() {
-            return 0;
-        }
-
-        public List<E> append(List<E> other) {
-
-            return other;
-
-        }
-
-        public boolean contains(E elem) {
-
-            return false;
-
-        }
-
-
-    }
-
-
-    class NodeL<E> extends List<E> {
-
-        E first;
-        List<E> rest;
-
-        NodeL(E f, List<E> r) {
-            this.first = f;
-            this.rest = r;
-        }
-
-        public boolean isEmpty() {
-            return false;
-        }
-
-        public boolean isSingleton() {
-            if (rest.isEmpty()) {
+            public boolean isEmpty() {
                 return true;
-            } else {
+            }
+
+            public boolean isSingleton() {
                 return false;
             }
+
+            public E getFirst() {
+
+                throw new IllegalArgumentException("EmptyListE");
+            }
+
+            public List<E> getRest() {
+
+                throw new IllegalArgumentException("EmptyListE");
+            }
+
+            public E get(int index) {
+
+                throw new IllegalArgumentException("EmptyListE");
+            }
+
+            public int length() {
+                return 0;
+            }
+
+            public List<E> append(List<E> other) {
+
+                return other;
+
+            }
+
+            public boolean contains(E elem) {
+
+                return false;
+
+            }
+
+
         }
 
-        public E getFirst() {
 
-            return first;
-        }
+        class NodeL<E> extends List<E> {
 
-        public List<E> getRest() {
+            E first;
+            List<E> rest;
 
-            return rest;
-        }
+            NodeL(E f, List<E> r) {
+                this.first = f;
+                this.rest = r;
+            }
 
-        public E get(int index) throws EmptyListE {
+            public boolean isEmpty() {
+                return false;
+            }
 
-            if (index == 0) {
+            public boolean isSingleton() {
+                if (rest.isEmpty()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            public E getFirst() {
+
                 return first;
-            } else {
-                return rest.get(index - 1);
+            }
+
+            public List<E> getRest() {
+
+                return rest;
+            }
+
+            public E get(int index) throws EmptyListE {
+
+                if (index == 0) {
+                    return first;
+                } else {
+                    return rest.get(index - 1);
+                }
+
+            }
+
+            public int length() {
+                if (rest.isEmpty()) {
+                    return 1;
+                } else {
+                    return 1 + rest.length();
+                }
+            }
+
+            public List<E> append(List<E> other) {
+
+                return new NodeL(first, rest.append(other));
+
+            }
+
+            public boolean contains(E elem) {
+    Boolean result = false;
+
+                if (elem == first) {
+                    result = true;
+
+                } else if (!rest.isEmpty()) {
+                    rest.contains(elem);
+                }
+
+
+                return result;
             }
 
         }
-
-        public int length() {
-            if (rest.isEmpty()) {
-                return 1;
-            } else {
-                return 1 + rest.length();
-            }
-        }
-
-        public List<E> append(List<E> other) {
-
-            return new NodeL(first, rest.append(other));
-
-        }
-
-        public boolean contains(E elem) {
-
-            if (elem == first) {
-                return true;
-            } else if (false == rest.isEmpty()) {
-                rest.contains(elem);
-            } else {
-                return false;
-            }
-
-
-            return false;
-        }
-
-    }
-
-
