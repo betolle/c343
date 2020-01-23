@@ -4,44 +4,116 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ListTest {
-    public List<Integer> A = new EmptyL<Integer>();
-public List<Integer> B = new NodeL<Integer>(4, A);
-public List<Integer> C = new NodeL<Integer>(0, B);
+     List<Integer> A = new EmptyL<>();
+     List<Integer> B = new NodeL(4, A);
+     List<Integer> C = new NodeL(0, B);
 
     @Test
     public void isEmpty() {
-        assertEquals(true, List.isEmpty(A));
-        assertEquals(false, List.isEmpty(B));
-        assertEquals(false, List.isEmpty(C));
+        assertEquals(true, A.isEmpty());
+        assertEquals(false, B.isEmpty());
+        assertEquals(false, C.isEmpty());
     }
 
     @Test
     public void isSingleton() {
-        assertEquals(false, List.isSingleton(A));
-        assertEquals(true, List.isSingleton(B));
-        assertEquals(false, List.isSingleton(C));
+        assertEquals(false, A.isSingleton());
+        assertEquals(true, B.isSingleton());
+        assertEquals(false, C.isSingleton());
     }
 
     @Test
     public void getFirst() {
-        //expect error assertEquals(, getFirst(A));
-        assertEquals(4, List.getFirst(B));
-        assertEquals(0, List.getFirst(C));
+        try { assertEquals((Integer) 0, A.getFirst());
+            fail();
+        }
+        catch (EmptyListE E) {
+
+        }
+
+        try { assertEquals((Integer)4, B.getFirst());
+        }
+        catch (EmptyListE E) {
+            fail();
+        }
+
+        try { assertEquals((Integer)0, C.getFirst());
+        }
+        catch (EmptyListE E) {
+            fail();
+        }
+
     }
 
     @Test
     public void getRest() {
-        //expect error
-        //expect error
-        assertEquals(4, List.getRest(C));
+
+        try { assertEquals(0, A.getRest());
+            fail();
+        }
+        catch (EmptyListE E) {
+        }
+
+        try { assertEquals(0, B.getRest());
+            fail();
+        }
+        catch (EmptyListE E) {
+        }
+
+        try { assertEquals(4, C.getRest());}
+        catch (EmptyListE E) {
+            fail();
+        }
+
+
 
     }
 
     @Test
     public void get() {
-        assertEquals(4, B.get(0));
-        assertEquals(0, C.get(0));
-        assertEquals(4, C.get(1));
+
+        try { assertEquals((Integer)4, B.get(0));
+        }
+        catch (EmptyListE E) {
+            fail();
+        }
+
+
+        try { assertEquals((Integer)0, C.get(0));
+        }
+        catch (EmptyListE E) {
+            fail();
+        }
+
+
+        try { assertEquals((Integer)4, C.get(1));
+        }
+        catch (EmptyListE E) {
+            fail();
+        }
+
+
+        try { assertEquals((Integer)0, C.get(4));
+            fail();
+        }
+        catch (EmptyListE E) {
+
+        }
+
+        try { assertEquals((Integer)0, B.get(4));
+            fail();
+        }
+        catch (EmptyListE E) {
+
+        }
+
+
+        try { assertEquals((Integer)0, A.get(4));
+            fail();
+        }
+        catch (EmptyListE E) {
+
+        }
     }
 
     @Test
@@ -55,17 +127,19 @@ public List<Integer> C = new NodeL<Integer>(0, B);
 
     @Test
     public void append() {
+        assertEquals(A, A.append(A));
+        assertEquals(B, A.append(B));
+
     }
 
     @Test
     public void contains() {
         assertEquals(false, A.contains(2));
         assertEquals(false, B.contains(2));
-        assertEquals(true ,B.contains(4));
-        assertEquals(true ,B.contains(4));
+        assertEquals(true , B.contains(4));
+        assertEquals(true , B.contains(4));
         assertEquals(false, C.contains(2));
         assertEquals(true, C.contains(4));
-}
+    }
 
 }
-
