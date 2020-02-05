@@ -19,9 +19,7 @@ class QueueTwoStacks<E> implements QueueI<E> {
         while (!front.empty())
         {
             back.push(front.pop());
-
         }
-
         // push elem
         front.push(elem);
 
@@ -60,6 +58,7 @@ class QueueTwoStacks<E> implements QueueI<E> {
 return 0;
         } else {
             return  1  + front.rest.size();
+            //stacklist.rest.size ??
         }
 
     }
