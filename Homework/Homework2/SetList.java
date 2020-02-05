@@ -7,20 +7,14 @@ class SetList<E> implements SetI<E> {
         elements = new EmptyL<>();
     }
 
-    private E data;
-    private SetList<E> rest;
-
-    SetList (E data, SetList<E> rest) {
-        this.data = data;
-        this.rest = rest;
-    }
 
     public void clear() {
-data = null;
+
+        elements = new EmptyL<>();
     }
 
     public boolean isEmpty() {
-        if(data == null){
+        if(elements.isEmpty()){
             return true;
         }else {
             return false;
@@ -31,26 +25,25 @@ data = null;
         if(contains(elem)){
             System.out.println("Already Contains, Cannot be added.");
         } else {
-            SetList newSet= new SetList(elem, new SetList(data,rest));
+            elements  = new NodeL<>(elem,  elements);
         }
 
     }
 
     public boolean contains(E elem) {
-        boolean result = false;
-        for(int i = 0;  i < size(); i++){
-            if(data == elem) {
-                result = true;
-            }
-        }
-        return result;
+        //O(n)
+       if(elements.contains(elem)){
+           return true;
+       }  else {
+           return false;
+       }
     }
 
     public int size() {
-        if(isEmpty()){
+        if(elements.isEmpty()){
             return 0;
         }else {
-            return 1 + rest.size();
+            return 1 + elements.getRest().size();
         }
     }
 
