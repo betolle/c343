@@ -5,27 +5,49 @@
 class QueueList<E> implements QueueI<E> {
     private List<E> elements;
 
+
+
     QueueList() {
         elements = new EmptyL<>();
     }
 
+
+
     public void clear() {
-
+elements = new EmptyL<>();
     }
 
+    //add
     public void offer(E elem) {
-
+elements = new NodeL<>(elem, elements);
     }
+
 
     public E poll() throws NoSuchElementE {
-        return null;
+        if(elements.isEmpty()){
+            throw new NoSuchElementE;
+        } else  {
+            return elements.getLast();
+        }
     }
 
+
+
     public E remove() throws NoSuchElementE {
-        return null;
+       if(elements.getRest().isEmpty()) {
+           return elements.getFirst();
+       } else {
+           elements.getRest().remove();
+       }
+
     }
 
     public int size() {
-        return 0;
+        if(elements.isEmpty()) {
+            return 0;
+        }
+            return 1  + elements.getRest().size();
+        }
+
     }
 }
