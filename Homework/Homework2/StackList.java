@@ -2,62 +2,47 @@
 
 class StackList<E> implements StackI<E> {
     private List<E> elements;
-    private StackList EmptyL;
+
 
     StackList() {
         elements = new EmptyL<>();
     }
 
 
-        E data;
-    static StackList rest;
-
-    StackList(StackList<E> rest, E data)
-        {
-            this.rest = rest;
-            this.data = data;
-
-        }
-    }
 
     public void clear() {
-data = null;
+elements = new EmptyL<>();
     }
 
     public boolean empty() {
-        if(data == null) {
-return true;
+        if(elements.isEmpty()) {
+            return true;
         } else {
-return false;
+            return false;
         }
     }
 
     public E peek() throws NoSuchElementE {
-        if(data == null) {
+        if(elements.isEmpty()) {
            throw new NoSuchElementE;
         } else {
-            return data;
+            return elements.getFirst();
         }
     }
 
     public E pop() throws NoSuchElementE {
-        if (empty()) {
-            System.out.println("Stack is Empty");
-            return null;
+        if (elements.isEmpty()) {
+            throw new NoSuchElementE();
         } else {
-
+            E popped = elements.getFirst();
+            List<E> rest = elements.getRest();
+            E newTop = rest.getFirst();
+            elements = new NodeL<>(newTop, rest);
+            return popped;
         }
     }
 
     public void push(E item) {
-
-
-        if (empty()) {
-            StackList newNode = new StackList(EmptyL, item);
-        }
-        else {
-            StackList newNode = new StackList(new StackList(rest, data),item);
-
-        }
+elements = new NodeL<>(item, elements);
     }
 }
